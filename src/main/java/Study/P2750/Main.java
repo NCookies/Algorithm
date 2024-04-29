@@ -3,7 +3,6 @@ package Study.P2750;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -17,8 +16,19 @@ public class Main {
             arr[i] = Integer.parseInt(br.readLine());
         }
 
-        Arrays.sort(arr);
+        // 선택 정렬
         for (int i = 0; i < n; i++) {
+            int minIndex = i;
+            for (int j = i; j < n; j++) {
+                if (arr[j] < arr[minIndex]) {
+                    minIndex = j;
+                }
+            }
+
+            int tmp = arr[i];
+            arr[i] = arr[minIndex];
+            arr[minIndex] = tmp;
+
             sb.append(arr[i]).append("\n");
         }
 
