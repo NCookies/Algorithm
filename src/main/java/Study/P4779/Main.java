@@ -5,31 +5,34 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main {
-    static StringBuilder sb;
-    static String str;
     static char[] charArr;
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int n = Integer.parseInt(br.readLine());
-        sb = new StringBuilder("_".repeat(n*n*n));
-        str = "_".repeat(n*n*n);
+        String input;
+        while ((input = br.readLine()) != null) {
+            int n = Integer.parseInt(input);
+            charArr = "-".repeat((int) Math.pow(3, n)).toCharArray();
 
-        charArr = "_".repeat(n*n*n).toCharArray();
+            cantor(charArr.length, 0);
 
-        cantor(str.length());
-
-        System.out.println(sb);
+            System.out.println(charArr);
+        }
     }
 
-    static int cantor(int x) {
-        if (x == 1) {
-            return 1;
-        } else {
-            for (int i = x / 3; i < x / 3 * 2; i++) {
-                charArr[i] = ' ';
-            }
-            return cantor(x / 3) + cantor(x * 2 /3);
+    static void cantor(int length, int startIndex) {
+        if (length == 1) {
+            return;
         }
+
+        int nextLength = length / 3;
+
+        for (int i = 0; i < nextLength; i++) {
+            charArr[i + startIndex + nextLength] = ' ';
+        }
+
+        cantor(nextLength, startIndex);
+        cantor(nextLength, startIndex + 2 * nextLength);
     }
 }
