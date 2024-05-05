@@ -1,4 +1,4 @@
-package Study.P23882;
+package Study.Chapter02_선택정렬.P23882;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,7 +25,7 @@ public class Main {
 
         st = new StringTokenizer(br.readLine());
         for (int i = 1; i <= n; i++) {
-            int num = Integer.parseInt(st.nextToken());;
+            int num = Integer.parseInt(st.nextToken());
             idxMap.put(num, i);
             numArr[i] = num;
         }

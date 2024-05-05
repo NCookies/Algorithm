@@ -1,4 +1,4 @@
-package Study.P25501;
+package Study.Chater03_재귀.P25501;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package Study.P2750;
+package Study.Chapter02_선택정렬.P2750;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package Study.P23883;
+package Study.Chapter02_선택정렬.P23883;
 
 import java.io.BufferedReader;
 import java.io.IOException;
