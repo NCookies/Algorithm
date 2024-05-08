@@ -1,4 +1,4 @@
-package Study.Chater03_재귀.P10870;
+package Study.Chapter03_재귀.P10870;
 
 import java.io.BufferedReader;
 import java.io.IOException;
