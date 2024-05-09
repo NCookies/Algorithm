@@ -39,15 +39,16 @@ public class Main {
         // 피벗으로 중간값 선택
         // int 값의 오버플로우를 대비하여 다음과 같이 수식을 구성함
         int pivot = arr[lo + ((hi - lo) / 2)];
+        lo--; hi++;
 
         while (lo <= hi) {
-            while (arr[lo] < pivot) {
+            do {
                 lo++;
-            }
+            } while (arr[lo] < pivot);
 
-            while (arr[hi] > pivot && lo <= hi) {
+            do {
                 hi--;
-            }
+            } while (arr[hi] > pivot && lo <= hi);
 
             if (lo < hi) {
                 swap(arr, lo, hi);
