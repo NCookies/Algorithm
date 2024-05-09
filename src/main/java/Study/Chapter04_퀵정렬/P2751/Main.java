@@ -3,6 +3,8 @@ package Study.Chapter04_퀵정렬.P2751;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -10,21 +12,22 @@ public class Main {
         StringBuilder sb = new StringBuilder();
 
         int n = Integer.parseInt(br.readLine());
-        int[] arr = new int[n];
+        ArrayList<Integer> list = new ArrayList<>();
 
         for (int i = 0 ; i < n; i++) {
-            arr[i] = Integer.parseInt(br.readLine());
+            list.add(Integer.parseInt(br.readLine()));
         }
+        Collections.shuffle(list);
 
-        quickSort(arr, 0, n - 1);
+        quickSort(list, 0, n - 1);
 
         for (int i = 0 ; i < n; i++) {
-            sb.append(arr[i]).append("\n");
+            sb.append(list.get(i)).append("\n");
         }
         System.out.println(sb);
     }
 
-    private static void quickSort(int[] arr, int lo, int hi) {
+    private static void quickSort(ArrayList<Integer> arr, int lo, int hi) {
         if (lo >= hi) {
             return;
         }
@@ -35,25 +38,22 @@ public class Main {
         quickSort(arr, pivot + 1, hi);
     }
 
-    private static int partition(int[] arr, int lo, int hi) {
-//        int[] tempArr = {arr[lo], arr[lo + (hi - lo) / 2], arr[hi]};
-//        Arrays.sort(tempArr);
+    private static int partition(ArrayList<Integer> arr, int lo, int hi) {
         int mid = lo + (hi - lo) / 2;
-        threeSort(arr, lo, mid, hi);
 
         // 피벗으로 중간값 선택
         // int 값의 오버플로우를 대비하여 다음과 같이 수식을 구성함
-        int pivot = arr[mid];
+        int pivot = arr.get(mid);
         lo--; hi++;
 
         while (lo <= hi) {
             do {
                 lo++;
-            } while (arr[lo] < pivot);
+            } while (arr.get(lo) < pivot);
 
             do {
                 hi--;
-            } while (arr[hi] > pivot && lo <= hi);
+            } while (arr.get(hi) > pivot && lo <= hi);
 
             if (lo < hi) {
                 swap(arr, lo, hi);
@@ -65,15 +65,9 @@ public class Main {
         return hi;
     }
 
-    private static void swap(int[] arr, int i, int j) {
-        int tmp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = tmp;
-    }
-
-    private static void threeSort(int []arr, int front, int mid, int rear) {
-        if (arr[front] > arr[mid]) swap(arr, front, mid);
-        if (arr[mid] > arr[rear]) swap(arr, mid, rear);
-        if (arr[front] > arr[mid]) swap(arr, front, mid);
+    private static void swap(ArrayList<Integer> arr, int i, int j) {
+        int tmp = arr.get(i);
+        arr.set(i, arr.get(j));
+        arr.set(j, tmp);
     }
 }
