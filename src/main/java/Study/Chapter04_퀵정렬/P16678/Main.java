@@ -3,6 +3,7 @@ package Study.Chapter04_퀵정렬.P16678;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -16,7 +17,8 @@ public class Main {
         }
         
         // 정렬
-        quickSort(arr, 0, n - 1);
+        Arrays.sort(arr);
+//        quickSort(arr, 0, n - 1);
 
         // 명예 점수들을 오름차순으로 정렬했을 때 첫 번째 명예 점수는 반드시 1이어야 함
         long hackers = arr[0] - 1;
