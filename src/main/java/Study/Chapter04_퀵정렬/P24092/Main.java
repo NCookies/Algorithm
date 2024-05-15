@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Main {
-    static int[] arrA;
     static int[] arrB;
 
     static boolean flag;
@@ -16,7 +15,7 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         int n = Integer.parseInt(st.nextToken());
-        arrA = new int[n];
+        int[] arrA = new int[n];
         arrB = new int[n];
 
         st = new StringTokenizer(br.readLine());
@@ -29,7 +28,7 @@ public class Main {
             arrB[i] = Integer.parseInt(st.nextToken());
         }
 
-        if (compare()) {
+        if (compare(arrA)) {
             return;
         }
 
@@ -58,39 +57,43 @@ public class Main {
 
         for (int j = lo; j < hi; j++) {
             if (a[j] <= pivot) {
-                swap(a, ++i, j);
-
-                if (compare()) {
-                    return -1;
+                if (swap(a, ++i, j)) {
+                    if (compare(a)) {
+                        return -1;
+                    }
                 }
             }
         }
 
         if (i + 1 != hi) {
-            swap(a, i + 1, hi);
-
-            if (compare()) {
-                return -1;
+            if (swap(a, i + 1, hi)) {
+                if (compare(a)) {
+                    return -1;
+                }
             }
         }
 
         return i + 1;
     }
 
-    static void swap(int[] a, int i, int j) {
+    static boolean swap(int[] a, int i, int j) {
         int temp = a[i];
         a[i] = a[j];
         a[j] = temp;
+
+        // 스왑한 데이터만을 비교
+        return (a[i] == arrB[i]) && (a[j] == arrB[j]);
     }
 
-    static boolean compare() {
-        for (int i = 0; i < arrA.length; i++) {
-            if (arrA[i] != arrB[i]) {
+    static boolean compare(int[] a) {
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] != arrB[i]) {
                 return false;
             }
         }
         flag = true;
         System.out.println(1);
+
         return true;
     }
 }
