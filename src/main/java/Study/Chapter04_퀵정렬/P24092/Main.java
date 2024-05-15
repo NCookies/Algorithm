@@ -9,17 +9,17 @@ public class Main {
     static int[] arrA;
     static int[] arrB;
 
-    static boolean flag;
+    static int eq;
+    static int flag = 0;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int n = Integer.parseInt(st.nextToken());
+        int n = Integer.parseInt(br.readLine());
         arrA = new int[n];
         arrB = new int[n];
 
-        st = new StringTokenizer(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
         for (int i = 0; i < n; i++) {
             arrA[i] = Integer.parseInt(st.nextToken());
         }
@@ -29,27 +29,21 @@ public class Main {
             arrB[i] = Integer.parseInt(st.nextToken());
         }
 
-        if (compare()) {
-            return;
+        if (compare() != -1) {
+            quickSort(arrA, 0, n - 1);
         }
 
-        quickSort(arrA, 0, n - 1);
-
-        if (!flag) {
-            System.out.println(0);
-        }
+        System.out.println(flag);
     }
 
     static void quickSort(int[] a, int lo, int hi) {
-        if (lo < hi) {
-            int pivot = partition(a, lo, hi);
-            if (pivot == -1) {
-                return;
-            }
+        if (lo >= hi) return;
+        if (flag == 1) return;
 
-            quickSort(a, lo, pivot - 1);
-            quickSort(a, pivot + 1, hi);
-        }
+        int pivot = partition(a, lo, hi);
+
+        quickSort(a, lo, pivot - 1);
+        quickSort(a, pivot + 1, hi);
     }
 
     static int partition(int[] a, int lo, int hi) {
@@ -58,43 +52,39 @@ public class Main {
 
         for (int j = lo; j < hi; j++) {
             if (a[j] <= pivot) {
-                if (swap(a, ++i, j)) {
-                    if (compare()) {
-                        return -1;
-                    }
-                }
+                swap(a, ++i, j);
             }
         }
 
         if (i + 1 != hi) {
-            if (swap(a, i + 1, hi)) {
-                if (compare()) {
-                    return -1;
-                }
-            }
+            swap(a, i + 1, hi);
         }
 
         return i + 1;
     }
 
-    static boolean swap(int[] a, int i, int j) {
+    static void swap(int[] a, int i, int j) {
         int temp = a[i];
         a[i] = a[j];
         a[j] = temp;
 
         // 스왑한 데이터만을 비교
-        return (arrA[i] == arrB[i]) && (arrA[j] == arrB[j]);
+        // 값을 스왑한 이후의 부분이 같다면 배열 B와 비교 작업 수행
+        if (eq == i || eq == j) {
+            eq = compare();
+        }
     }
 
-    static boolean compare() {
+    static int compare() {
         for (int i = 0; i < arrA.length; i++) {
             if (arrA[i] != arrB[i]) {
-                return false;
+                // 값이 다른 인덱스 반환
+                return i;
             }
         }
-        flag = true;
-        System.out.println(1);
 
-        return true;
+        // 두 배열이 같은 경우
+        flag = 1;
+        return -1;
     }
 }
