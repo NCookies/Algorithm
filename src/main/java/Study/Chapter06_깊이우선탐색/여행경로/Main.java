@@ -8,13 +8,24 @@ public class Main {
     static Map<String, List<String>> map;
 
     public static void main(String[] args) {
+//        String[][] tickets = {
+//                {"ICN", "SFO"},
+//                {"ICN", "ATL"},
+//                {"SFO", "ATL"},
+//                {"ATL", "ICN"},
+//                {"ATL", "SFO"}
+//        };
+//        String[][] tickets = {
+//                {"AAA", "BBB"},
+//                {"AAA", "CCC"},
+//                {"CCC", "AAA"}
+//        };
         String[][] tickets = {
-                {"ICN", "SFO"},
-                {"ICN", "ATL"},
-                {"SFO", "ATL"},
-                {"ATL", "ICN"},
-                {"ATL", "SFO"}
+                {"ICN", "D"},
+                {"D", "ICN"},
+                {"ICN", "B"}
         };
+
         solution(tickets);
     }
 
@@ -22,34 +33,28 @@ public class Main {
         answer = new String[tickets.length + 1];
         used = new boolean[tickets.length];
 
-        map = new HashMap<>();
+        Arrays.sort(tickets, Comparator.comparing(ticket -> ticket[1]));
 
-        for (String[] ticket : tickets) {
-            map.computeIfAbsent(ticket[0], k -> new ArrayList<>()).add(ticket[1]);
-        }
-
-        dfs("ICN", 0);
+        dfs(tickets, "ICN", 0);
 
         return answer;
     }
 
-    static private void dfs(String departure, int depth) {
-        List<String> arrivals = map.get(departure);
-        if (arrivals.isEmpty()) {
+    static private void dfs(String[][] tickets, String departure, int depth) {
+        if (depth == tickets.length) {
             answer[depth] = departure;
             return;
         }
-        arrivals.sort(String::compareTo);
 
-        for (int i = 0; i < arrivals.size(); i++) {
-            answer[depth] = departure;
-            arrivals.ge
-        }
+        for (int i = 0; i < tickets.length; i++) {
+            // 아직 사용하지 않고 출발지가 동일한 티켓
+            if (!used[i] && tickets[i][0].equals(departure)) {
+                used[i] = true;
+                answer[depth] = departure;
+                dfs(tickets, tickets[i][1], depth + 1);
 
-        for (String arrival : arrivals) {
-            answer[depth] = departure;
-            arrivals.remove(arrival);
-            dfs(arrival, depth + 1);
+                used[i] = false;
+            }
         }
     }
 }
