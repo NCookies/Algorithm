@@ -64,6 +64,10 @@ public class Main {
             List<Point> normalized = normarlize(emptyBlock);
 
             for (List<Point> puzzleBlock : puzzleBlocks) {
+                if (emptyBlock.size() != puzzleBlock.size()) {
+                    continue;
+                }
+
                 if (compareBlocks(normalized, puzzleBlock)) {
                     answer += emptyBlock.size();
                     puzzleBlocks.remove(puzzleBlock);
