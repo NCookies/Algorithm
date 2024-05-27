@@ -127,6 +127,11 @@ public class Main {
 
     // 테이블에서 블럭 추출하기
     static private List<List<Point>> extractBlocks(int[][] table, int extractNum) {
+//        return bfs(table, extractNum);
+        return bfs(table, extractNum);
+    }
+
+    private static List<List<Point>> bfs(int[][] table, int extractNum) {
         // 추출한 블럭 저장
         List<List<Point>> blocks = new ArrayList<>();
 
