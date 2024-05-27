@@ -13,6 +13,8 @@ public class Main {
     }
 
     static public int solution(String numbers) {
+        int answer = 0;
+
         charArray = numbers.toCharArray();
         visited = new boolean[charArray.length];
 
@@ -20,15 +22,19 @@ public class Main {
             dfs(0, i + 1, "");
         }
 
-        return result.size();
+        for (int num : result) {
+            if (isPrime(num)) {
+                answer++;
+            }
+        }
+
+        return answer;
     }
 
     static private void dfs(int depth, int digits, String num) {
         // N자리수 숫자가 완성되면 소수 판별
         if (depth == digits) {
-            if (isPrime(Integer.parseInt(num))) {
-                result.add(Integer.parseInt(num));
-            }
+            result.add(Integer.parseInt(num));
             return;
         }
         
