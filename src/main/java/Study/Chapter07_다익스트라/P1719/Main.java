@@ -9,6 +9,7 @@ public class Main {
     static private final StringBuilder sb = new StringBuilder();
 
     static private ArrayList<Node>[] graph;
+    static int[][] result;
 
     static private class Node {
         int idx;
@@ -27,6 +28,7 @@ public class Main {
         int V = Integer.parseInt(st.nextToken());
         int E = Integer.parseInt(st.nextToken());
 
+        result = new int[V + 1][V + 1];
         graph = new ArrayList[V + 1];
         for (int i = 1; i < V + 1; i++) {
             graph[i] = new ArrayList<>();   // 그래프 초기화
@@ -47,12 +49,23 @@ public class Main {
             dijkstra(i, V);
         }
 
+        for (int i = 1; i < V + 1; i++) {
+            for (int j = 1; j < V + 1; j++) {
+                if (i == j) {
+                    sb.append("-").append(" ");
+                } else {
+                    sb.append(result[i][j]).append(" ");
+                }
+
+            }
+            sb.append("\n");
+        }
+
         System.out.println(sb);
     }
 
     private static void dijkstra(int start, int V) {
         int[] dist = new int[V + 1];
-        int[] parents = new int[V + 1];
 
         Arrays.fill(dist, Integer.MAX_VALUE);
 
@@ -74,30 +87,10 @@ public class Main {
                 if (dist[nextNode.idx] > nextWeight) {
                     dist[nextNode.idx] = nextWeight;
 
-                    // 최소 경로를 구한 노드의 부모 노드 기록
-                    parents[nextNode.idx] = curNode.idx;
+                    result[nextNode.idx][start] = curNode.idx;
                     queue.offer(new Node(nextNode.idx, dist[nextNode.idx]));
                 }
             }
         }
-
-        traceRoute(parents, start);
-    }
-
-    // 부모 배열 사용하여 경로 역추적
-    private static void traceRoute(int[] parents, int start) {
-        for (int i = 1; i < parents.length; i++) {
-            if (i == start) {
-                sb.append("- ");
-                continue;
-            }
-            int answer = 0;
-            // 부모 노드가 start일 때까지 answer 갱신
-            for (int j = i; j != start; j = parents[j]) {
-                answer = j;
-            }
-            sb.append(answer).append(" ");
-        }
-        sb.append("\n");
     }
 }
