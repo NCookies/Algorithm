@@ -30,7 +30,7 @@ public class Main {
 
         // 노드 간의 간선 연결 정보와 가중치 저장
         ArrayList<Node>[] graph = new ArrayList[V + 1];
-        for (int i = 0; i < V + 1; i++) {
+        for (int i = 1; i < V + 1; i++) {
             graph[i] = new ArrayList<>();   // 그래프 초기화
             dist[i] = Integer.MAX_VALUE;    // 최소 비용 배열 초기화
         }
