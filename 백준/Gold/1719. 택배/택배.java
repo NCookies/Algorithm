@@ -74,7 +74,7 @@ public class Main {
         while (!queue.isEmpty()) {
             Node curNode = queue.poll();
 
-            if (dist[curNode.idx] > curNode.weight) {
+            if (dist[curNode.idx] < curNode.weight) {
                 continue;
             }
 
