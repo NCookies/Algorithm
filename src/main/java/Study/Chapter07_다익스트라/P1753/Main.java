@@ -57,7 +57,7 @@ public class Main {
             Node curNode = pq.poll();
 
             // 큐에서 꺼낸 노드의 비용이 기존의 최소 비용 배열에 저장된 값보다 작다면 검사할 필요가 없다.
-            if (dist[curNode.idx] > curNode.weight) {
+            if (dist[curNode.idx] < curNode.weight) {
                 continue;
             }
 
