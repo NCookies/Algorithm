@@ -52,17 +52,19 @@ public class Main {
                 int nx = cur.x + dx[i];
                 int ny = cur.y + dy[i];
 
-                // 이동거리가 다음 위치와 차이가 없다면 연산할 필요가 없음
-                if (nx >= 0 && nx < n && ny >= 0 && ny < n
-                && dist[cur.x][cur.y] < dist[nx][ny]) {
-                    // 다음 위치가 흰 방이라면 변경 횟수는 증가하지 않음
-                    if (map[nx][ny] == 1) {
-                        dist[nx][ny] = dist[cur.x][cur.y];
-                    } else {
-                        // 다음 위치가 검은 방이라면 변경 횟수 증가
-                        dist[nx][ny] = dist[cur.x][cur.y] + 1;
+                // 좌표가 유효한지 확인
+                if (nx >= 0 && nx < n && ny >= 0 && ny < n) {
+                    // 현재 경로가 최단 거리가 아니라면 갱신하지 않는다.
+                    if (dist[cur.x][cur.y] < dist[nx][ny]) {
+                        // 다음 위치가 흰 방이라면 변경 횟수는 증가하지 않음
+                        if (map[nx][ny] == 1) {
+                            dist[nx][ny] = dist[cur.x][cur.y];
+                        } else {
+                            // 다음 위치가 검은 방이라면 변경 횟수 증가
+                            dist[nx][ny] = dist[cur.x][cur.y] + 1;
+                        }
+                        q.offer(new Point(nx, ny));
                     }
-                    q.offer(new Point(nx, ny));
                 }
             }
         }
