@@ -18,18 +18,13 @@ public class Main {
             arr[i] = Integer.parseInt(br.readLine());
         }
 
-        int coin = 0;
         int cnt = 0;
         for (int i = n - 1; i >= 0; i--) {
-            while (coin + arr[i] <= k) {
-                coin += arr[i];
-                cnt++;
-            }
-
-            if (coin == k) {
-                System.out.println(cnt);
-                return;
+            if (k >= arr[i]) {
+                cnt += k / arr[i];
+                k = k % arr[i];
             }
         }
+        System.out.println(cnt);
     }
 }
