@@ -13,8 +13,9 @@ public class Main {
         int[][] dp = new int[n + 1][m + 1];
         
         // 물에 잠긴 곳은 -1로 표시
+        // 물에 잠긴 위치는 2차원 배열 표시가 아닌 (x, y) 좌표를 기준으로 주기 때문에 유의해야 함
         for (int[] puddle : puddles) {
-            dp[puddle[0]][puddle[1]] = -1;
+            dp[puddle[1]][puddle[0]] = -1;
         }
 
         // 시작점(dp[1][1])을 1로 초기화하기 위해 설정
