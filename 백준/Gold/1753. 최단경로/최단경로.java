@@ -30,7 +30,7 @@ public class Main {
 
         // 노드 간의 간선 연결 정보와 가중치 저장
         ArrayList<Node>[] graph = new ArrayList[V + 1];
-        for (int i = 0; i < V + 1; i++) {
+        for (int i = 1; i < V + 1; i++) {
             graph[i] = new ArrayList<>();   // 그래프 초기화
             dist[i] = Integer.MAX_VALUE;    // 최소 비용 배열 초기화
         }
@@ -53,7 +53,7 @@ public class Main {
             Node curNode = pq.poll();
 
             // 큐에서 꺼낸 노드의 비용이 기존의 최소 비용 배열에 저장된 값보다 작다면 검사할 필요가 없다.
-            if (dist[curNode.idx] > curNode.weight) {
+            if (dist[curNode.idx] < curNode.weight) {
                 continue;
             }
 
