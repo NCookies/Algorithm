@@ -1,4 +1,4 @@
-package Study.Chatper09_동적프로그래밍.P9251;
+package Baekjoon_Level.Level23_동적계획법1.P9251;
 
 import java.io.BufferedReader;
 import java.io.IOException;
