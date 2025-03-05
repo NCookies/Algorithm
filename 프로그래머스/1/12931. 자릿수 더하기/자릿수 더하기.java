@@ -2,11 +2,11 @@ import java.util.*;
 
 public class Solution {
     public int solution(int n) {
-        String[] digits = String.valueOf(n).split("");
+        char[] digits = Integer.toString(n).toCharArray();
         
         int sum = 0;
-        for (String s : digits) {
-            sum += Integer.valueOf(s);
+        for (char c : digits) {
+            sum += c - 48;
         }
 
         return sum;
