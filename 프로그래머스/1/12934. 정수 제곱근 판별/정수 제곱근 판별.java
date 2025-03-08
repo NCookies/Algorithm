@@ -1,10 +1,6 @@
 class Solution {
     public long solution(long n) {
-        long s = (long) Math.sqrt(n);
-        if (s * s == n) {
-            return (long) Math.pow(s + 1, 2);
-        } else {
-            return -1;
-        }
+        double s = Math.sqrt(n);
+        return n % s == 0 ? (long) Math.pow(s + 1, 2) : -1;
     }
 }
