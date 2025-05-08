@@ -1,5 +1,5 @@
 SELECT
-    *
+    id, movie, description, rating
 FROM
     Cinema
 WHERE
