@@ -1,6 +1,7 @@
 import java.util.*;
 
 public class Main {
+
     public static int solution(String str, char c) {
         int answer = 0;
         str = str.toLowerCase();
@@ -18,4 +19,5 @@ public class Main {
         char c = in.next().charAt(0);
         System.out.print(solution(str, c));
     }
+
 }
